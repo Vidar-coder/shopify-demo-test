@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/*
+ * Theme tokens come from the active SiteConfig (injected as --c-*, --f-*, --r-*
+ * in app/layout.tsx). Tailwind utilities map onto them, so every component is
+ * brand-neutral: bg-primary, text-ink, rounded-lg, font-heading, etc.
+ */
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-alt: var(--c-surface-alt);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-primary: var(--c-primary);
+  --color-primary-ink: var(--c-primary-ink);
+  --color-accent: var(--c-accent);
+  --color-accent-ink: var(--c-accent-ink);
+  --color-pop: var(--c-pop);
+  --color-pop-ink: var(--c-pop-ink);
+
+  --font-heading: var(--f-heading);
+  --font-body: var(--f-body);
+
+  --radius-sm: var(--r-sm);
+  --radius-md: var(--r-md);
+  --radius-lg: var(--r-lg);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--f-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--f-heading);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    font-weight: 750;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--c-pop);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--c-accent);
+    color: var(--c-accent-ink);
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+  .display {
+    font-variation-settings: "wdth" 82;
+    letter-spacing: -0.022em;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 650;
+    font-size: 0.975rem;
+    transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-primary {
+    background: var(--c-primary);
+    color: var(--c-primary-ink);
+    box-shadow: 0 3px 0 0 color-mix(in srgb, var(--c-primary) 55%, black);
+  }
+  .btn-primary:hover {
+    background: color-mix(in srgb, var(--c-primary) 88%, white);
+  }
+  .btn-accent {
+    background: var(--c-accent);
+    color: var(--c-accent-ink);
+    box-shadow: 0 3px 0 0 color-mix(in srgb, var(--c-accent) 60%, black);
+  }
+  .btn-accent:hover {
+    background: color-mix(in srgb, var(--c-accent) 85%, white);
+  }
+  .btn-ghost {
+    border: 2px solid currentColor;
+  }
+  .btn-ghost:hover {
+    background: color-mix(in srgb, currentColor 8%, transparent);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
